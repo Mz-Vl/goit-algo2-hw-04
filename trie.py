@@ -6,7 +6,7 @@ class Trie:
         if not isinstance(word, str):
             raise TypeError("Word must be a string")
         if not word:
-            raise ValueError("Word не cannot be empty")
+            raise ValueError("Word cannot be empty")
 
         current = self._root
 
@@ -29,3 +29,16 @@ class Trie:
             current = current[char]
 
         return current.get('*')
+
+class TrieNode:
+    def __init__(self):
+        self.children = {}
+        self.is_end_of_word = False
+
+    def insert(self, word):
+        node = self
+        for char in word:
+            if char not in node.children:
+                node.children[char] = TrieNode()
+            node = node.children[char]
+        node.is_end_of_word = True
